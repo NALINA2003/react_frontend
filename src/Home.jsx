@@ -71,7 +71,7 @@ const validate = () => {
         data,
       );
       console.log(res, "rsds");
-      getusers();
+      get_books();
     } catch (err) {
       console.log(err);
     }
@@ -117,28 +117,47 @@ const validate = () => {
         {error.date ? <p>{error.date}</p> : ""}
         <textarea placeholder='Give your text here'></textarea>
         {error.description ? <p>{error.description}</p> : ""}
+        <button onClick={book}>Submit</button>
     </div>
-     <table border='1'>
-        <tr>
-            <th>Name</th>
-            <th>Author_name</th>
-            <th>General</th>
-            <th>Date</th>
-            <th>Description</th>
-            <th>image</th>
-        </tr>
-         {data.map((c) => (
-          <tr key={c.id}>
-            <td>{c.name}</td>
-            <td>{c.author_name}</td>
-            <td>{c.general}</td>
-            <td>{c.date}</td>
-            <td>{c.description}</td>
-          <td><img src={c.image} alt="" /></td>
-     
-          </tr>
-        ))}
-     </table>
+     <table border="1">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Author_name</th>
+      <th>General</th>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Image</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {data.map((c) => (
+      <tr key={c.id}>
+        <td>{c.name}</td>
+        <td>{c.author_name}</td>
+        <td>{c.general}</td>
+        <td>{c.date}</td>
+        <td>{c.description}</td>
+
+        <td>
+          <img
+            src={`http://127.0.0.1:8000${c.image}`}
+            alt=""
+            width="100"
+          />
+        </td>
+
+        <td>
+          <button onClick={() => get_book_id(c.id)}>
+            Edit
+          </button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
 
     </div>
   )
